@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid');
 const sheets = require('../utils/sheets');
 
 const TOTAL_TICKETS = 15;
