@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>哈哈哈哈哈哈哈哈 哈利首場個人專場 ｜ 購票</title>
+  <title>哈哈哈哈哈 哈利首場個人專場 ｜ 購票</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
@@ -516,10 +516,9 @@
       border-radius: 12px; overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.6);
       margin-bottom: 20px;
-      display: inline-block;
-      max-width: 100%;
+      width: 100%;
     }
-    #ticketCanvas { display: block; max-width: 100%; height: auto; }
+    #ticketCanvas { display: block; width: 100%; height: auto; }
 
     .btn-download {
       display: inline-flex; align-items: center; gap: 8px;
@@ -572,7 +571,7 @@
   <div class="hero-glow"></div>
   <div class="hero-content">
     <div class="event-badge">🎤 Live Show</div>
-    <h1 class="event-title" id="eventTitle">哈哈哈哈哈哈哈哈 哈利首場個人專場</h1>
+    <h1 class="event-title" id="eventTitle">哈哈哈哈哈 哈利首場個人專場</h1>
     <div class="event-meta-row">
       <div class="meta-chip"><span class="icon">📅</span>2026 / 05 / 19（二）</div>
       <div class="meta-chip"><span class="icon">🕖</span>入場 19:30 ｜ 開始 19:45</div>
@@ -686,14 +685,14 @@
 // ────────────────────────────────────────────────
 //  CONFIG
 // ────────────────────────────────────────────────
-const DEFAULT_TITLE = '哈哈哈哈哈哈哈哈 哈利首場個人專場';
+const DEFAULT_TITLE = '哈哈哈哈哈 哈利首場個人專場';
 
 const DEFAULT_TICKET_TYPES = [
   { id: 'presale_drink', label: '預售走喝酒票', price: 929, note: '限兩杯', presale: true },
   { id: 'presale_nondry', label: '預售去走走票', price: 799, note: '無酒精', presale: true },
 ];
 
-const SALE_START = new Date('2026-05-14T12:00:00+08:00');
+const SALE_START = new Date('2026-05-14T22:00:00+08:00');
 const SALE_END   = new Date('2026-05-18T23:59:59+08:00');
 const EVENT_DATE = '2026/05/19（二）';
 const EVENT_VENUE = 'ViBES 歌喉響宴 KTV';
@@ -934,28 +933,17 @@ function buildStep3() {
     </div>
 
     <div class="payment-info">
-      <h3>💳 付款方式（擇一即可）</h3>
+      <h3>💳 付款方式</h3>
       <div class="payment-option-row">
-        <div class="payment-opt">
+        <div class="payment-opt" style="flex:1">
           <div class="payment-opt-icon">💵</div>
           <div class="payment-opt-body">
             <div class="payment-opt-title">現金</div>
             <div class="payment-opt-desc">活動當日現場繳費，<br/>入場前交給主辦人員</div>
           </div>
         </div>
-        <div class="payment-opt-divider">或</div>
-        <div class="payment-opt">
-          <div class="payment-opt-icon">💚</div>
-          <div class="payment-opt-body">
-            <div class="payment-opt-title">LINE Pay</div>
-            ${pay.linepayId
-              ? `<div class="payment-opt-desc">轉帳給<br/><strong class="payment-id">${pay.linepayId}</strong></div>`
-              : `<div class="payment-opt-desc" style="color:rgba(255,255,255,0.35)">（主辦尚未設定 ID）</div>`
-            }
-          </div>
-        </div>
       </div>
-      <div class="payment-note">⚠️ ${pay.note || '付款完成後請截圖傳給主辦確認，訂單確認後票券即生效'}</div>
+      <div class="payment-note">⚠️ 購票完成後請至現場繳費，票券於付款確認後即生效</div>
     </div>
 
     <div style="display:flex; gap:10px;">
@@ -1106,8 +1094,8 @@ async function renderTicket(order) {
   const W = 840, H = 320;
   canvas.width  = W * DPR;
   canvas.height = H * DPR;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
+  canvas.style.width  = '100%';
+  canvas.style.height = 'auto';
   const ctx = canvas.getContext('2d');
   ctx.scale(DPR, DPR);
 
@@ -1223,7 +1211,7 @@ async function renderTicket(order) {
   const qrY = 28;
 
   // Generate QR as data URL
-  const qrDataUrl = await generateQR(`VIBES:${order.orderId}:${order.name}`);
+  const qrDataUrl = await generateQR('https://hackmd.io/_uploads/rkXndHQkMl.jpg');
   const qrImg = new Image();
   await new Promise(resolve => { qrImg.onload = resolve; qrImg.src = qrDataUrl; });
 
