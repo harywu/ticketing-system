@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>哈哈哈哈哈哈哈哈 哈利首場個人專場 ｜ 購票</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a14;
+      --surface: #12121f;
+      --surface2: #1a1a2e;
+      --gold: #ffd700;
+      --gold2: #f0c000;
+      --pink: #e040a0;
+      --purple: #7c3aed;
+      --purple2: #5b21b6;
+      --text: #f0f0f8;
+      --muted: rgba(240,240,248,0.55);
+      --border: rgba(255,255,255,0.08);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 40px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(124,58,237,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(224,64,160,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(10,10,40,1) 40%, transparent 70%),
+        linear-gradient(160deg, #0d0520 0%, #120826 40%, #060618 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-glow {
+      position: absolute; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+    .event-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+    }
+    .event-title {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #fff 30%, var(--gold) 70%, #ffa0c8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .event-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .meta-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 99px;
+      padding: 8px 18px;
+      font-size: 14px;
+      backdrop-filter: blur(6px);
+    }
+    .meta-chip .icon { font-size: 16px; }
+
+    /* ── COUNTDOWN ── */
+    #countdown-section { margin-bottom: 36px; }
+    .countdown-label {
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .countdown-grid {
+      display: flex; gap: 12px; justify-content: center;
+    }
+    .countdown-unit {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 10px;
+      padding: 12px 18px;
+      min-width: 70px;
+      text-align: center;
+    }
+    .countdown-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .countdown-lbl {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── BUY BUTTON ── */
+    .btn-buy {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: inherit;
+      padding: 16px 44px;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(124,58,237,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .btn-buy:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(124,58,237,0.65), 0 0 0 1px rgba(255,255,255,0.15);
+    }
+    .btn-buy:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .sold-out-badge {
+      display: inline-block;
+      background: rgba(255,80,80,0.15);
+      border: 1px solid rgba(255,80,80,0.4);
+      color: #ff6060;
+      padding: 12px 32px;
+      border-radius: 99px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .sale-ended-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted);
+      padding: 12px 32px;
+      border-radius: 99px;
+      font-size: 15px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── SECTION HEADING ── */
+    .section-heading {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 20px;
+    }
+
+    /* ── TICKET CARDS ── */
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .ticket-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .ticket-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+    .ticket-card.presale { border-top: 3px solid var(--purple); }
+    .ticket-card.onsite { border-top: 3px solid rgba(255,255,255,0.18); opacity: 0.7; }
+    .ticket-card-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .ticket-card.presale .ticket-card-label { color: var(--purple); }
+    .ticket-card.onsite .ticket-card-label { color: var(--muted); }
+    .ticket-card-name {
+      font-size: 18px; font-weight: 700; margin-bottom: 6px;
+    }
+    .ticket-card-note {
+      font-size: 13px; color: var(--muted); margin-bottom: 16px;
+    }
+    .ticket-card-price {
+      font-size: 28px; font-weight: 900;
+      color: var(--gold);
+    }
+    .ticket-card-price span { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+    .onsite-tag {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 10px; padding: 3px 10px; border-radius: 99px;
+    }
+    .presale-tag {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.35);
+      color: #a78bfa;
+      font-size: 10px; padding: 3px 10px; border-radius: 99px;
+    }
+
+    /* ── NOTES ── */
+    .notes-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+    .notes-card ul { list-style: none; }
+    .notes-card li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--muted);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .notes-card li:last-child { border-bottom: none; }
+    .notes-card li::before { content: '▸'; color: var(--purple); flex-shrink: 0; margin-top: 2px; }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%; max-width: 520px;
+      max-height: 92vh;
+      overflow-y: auto;
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.25s;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 26px 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0;
+      background: var(--surface);
+      z-index: 1;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; }
+    .modal-close {
+      background: rgba(255,255,255,0.08);
+      border: none; color: var(--text);
+      width: 32px; height: 32px;
+      border-radius: 50%; cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.15); }
+
+    .modal-body { padding: 26px; }
+
+    /* ── STEP INDICATOR ── */
+    .steps {
+      display: flex; align-items: center;
+      gap: 0; margin-bottom: 28px;
+    }
+    .step { display: flex; align-items: center; }
+    .step-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .step-dot.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .step-dot.done { background: #22c55e; border-color: #22c55e; color: #fff; }
+    .step-line {
+      flex: 1; height: 2px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.3s;
+    }
+    .step-line.done { background: var(--purple); }
+
+    /* ── FORM ── */
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 500;
+      color: var(--muted); margin-bottom: 7px;
+    }
+    .form-group label span.req { color: var(--pink); margin-left: 3px; }
+    .form-control {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus { border-color: var(--purple); }
+    .form-control.error { border-color: #f87171; }
+    select.form-control { cursor: pointer; }
+    select.form-control option { background: #1a1a2e; color: var(--text); }
+    .field-error { color: #f87171; font-size: 12px; margin-top: 5px; }
+
+    /* ── TICKET SELECTOR ── */
+    .ticket-options { display: flex; flex-direction: column; gap: 10px; }
+    .ticket-option {
+      display: flex; align-items: center;
+      gap: 14px; padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 12px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .ticket-option:hover { border-color: rgba(124,58,237,0.4); }
+    .ticket-option.selected { border-color: var(--purple); background: rgba(124,58,237,0.1); }
+    .ticket-option input[type=radio] { display: none; }
+    .ticket-opt-radio {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .ticket-option.selected .ticket-opt-radio {
+      border-color: var(--purple);
+      background: var(--purple);
+    }
+    .ticket-option.selected .ticket-opt-radio::after {
+      content: ''; width: 8px; height: 8px;
+      border-radius: 50%; background: #fff;
+    }
+    .ticket-opt-info { flex: 1; }
+    .ticket-opt-name { font-size: 15px; font-weight: 600; }
+    .ticket-opt-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .ticket-opt-price { font-size: 18px; font-weight: 900; color: var(--gold); }
+    .ticket-opt-price span { font-size: 12px; font-weight: 400; color: var(--muted); }
+
+    /* ── ORDER SUMMARY ── */
+    .summary-card {
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between;
+      font-size: 14px; padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row .label { color: var(--muted); }
+    .summary-total {
+      display: flex; justify-content: space-between;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 18px; font-weight: 700;
+    }
+    .summary-total .amount { color: var(--gold); }
+
+    /* ── PAYMENT INFO ── */
+    .payment-info {
+      background: rgba(255,215,0,0.06);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .payment-info h3 {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .payment-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; padding: 5px 0;
+    }
+    .payment-row .key { color: var(--muted); }
+    .payment-row .val { font-weight: 600; }
+    .payment-option-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .payment-opt {
+      flex: 1; display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 12px;
+    }
+    .payment-opt-icon { font-size: 22px; line-height: 1; padding-top: 2px; }
+    .payment-opt-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .payment-opt-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .payment-id { color: var(--gold); font-size: 14px; }
+    .payment-opt-divider {
+      font-size: 12px; color: var(--muted);
+      flex-shrink: 0; padding: 0 2px;
+    }
+    .payment-note {
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* ── AVAILABILITY BAR ── */
+    .avail-bar-wrap {
+      margin-bottom: 20px;
+    }
+    .avail-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--muted); margin-bottom: 6px;
+    }
+    .avail-bar {
+      height: 6px; border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .avail-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      transition: width 0.5s;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 15px; font-weight: 700; font-family: inherit;
+      padding: 13px 28px; border-radius: 12px;
+      border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff; width: 100%;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+    }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+    /* ── TICKET DISPLAY ── */
+    #ticket-display { text-align: center; }
+    #ticket-display h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+    #ticket-display p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+
+    .ticket-canvas-wrap {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      margin-bottom: 20px;
+      display: inline-block;
+      max-width: 100%;
+    }
+    #ticketCanvas { display: block; max-width: 100%; height: auto; }
+
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--gold2), #e6a800);
+      color: #000; font-weight: 800; font-size: 15px; font-family: inherit;
+      padding: 14px 36px; border: none; border-radius: 12px; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+    }
+    .btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,215,0,0.45); }
+
+    .ticket-warning {
+      font-size: 12px; color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px; padding: 10px 14px; margin-top: 14px;
+      text-align: left; line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+    }
+
+    /* ── SPINNER ── */
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.25);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 500px) {
+      .tickets-grid { grid-template-columns: 1fr; }
+      .countdown-unit { min-width: 58px; padding: 10px 12px; }
+      .countdown-num { font-size: 1.6rem; }
+      .modal-body { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────── HERO ─────────────── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="event-badge">🎤 Live Show</div>
+    <h1 class="event-title" id="eventTitle">哈哈哈哈哈哈哈哈 哈利首場個人專場</h1>
+    <div class="event-meta-row">
+      <div class="meta-chip"><span class="icon">📅</span>2026 / 05 / 19（二）</div>
+      <div class="meta-chip"><span class="icon">🕖</span>入場 19:30 ｜ 開始 19:45</div>
+      <div class="meta-chip"><span class="icon">📍</span>ViBES 歌喉響宴 KTV</div>
+    </div>
+
+    <div id="countdown-section">
+      <div class="countdown-label">距離開賣</div>
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="countdown-unit"><div class="countdown-num" id="cd-d">--</div><div class="countdown-lbl">天</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cd-h">--</div><div class="countdown-lbl">時</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cd-m">--</div><div class="countdown-lbl">分</div></div>
+        <div class="countdown-unit"><div class="countdown-num" id="cd-s">--</div><div class="countdown-lbl">秒</div></div>
+      </div>
+    </div>
+
+    <div id="heroAction">
+      <button class="btn-buy" id="buyHeroBtn" disabled>
+        <span>🎫</span> 立即購票
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── CONTENT ─────────────── -->
+<main class="container">
+
+  <div class="avail-bar-wrap" id="availWrap" style="display:none">
+    <div class="avail-bar-label">
+      <span>票券銷售進度</span>
+      <span id="availText"></span>
+    </div>
+    <div class="avail-bar">
+      <div class="avail-bar-fill" id="availFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Ticket types -->
+  <div class="section-heading">票種一覽</div>
+  <div class="tickets-grid">
+    <!-- Presale -->
+    <div class="ticket-card presale">
+      <span class="presale-tag">網路預售</span>
+      <div class="ticket-card-label">Presale</div>
+      <div class="ticket-card-name">走喝酒票</div>
+      <div class="ticket-card-note">包含兩杯酒精飲料</div>
+      <div class="ticket-card-price">NT$929<span>/人</span></div>
+    </div>
+    <div class="ticket-card presale">
+      <span class="presale-tag">網路預售</span>
+      <div class="ticket-card-label">Presale</div>
+      <div class="ticket-card-name">去走走票</div>
+      <div class="ticket-card-note">無酒精，歡迎駕車前來</div>
+      <div class="ticket-card-price">NT$799<span>/人</span></div>
+    </div>
+    <!-- Onsite -->
+    <div class="ticket-card onsite">
+      <span class="onsite-tag">現場購票</span>
+      <div class="ticket-card-label">On-site</div>
+      <div class="ticket-card-name">一起喝酒票</div>
+      <div class="ticket-card-note">無限暢飲套餐</div>
+      <div class="ticket-card-price">NT$1,729<span>/人</span></div>
+    </div>
+    <div class="ticket-card onsite">
+      <span class="onsite-tag">現場購票</span>
+      <div class="ticket-card-label">On-site</div>
+      <div class="ticket-card-name">不喝酒票</div>
+      <div class="ticket-card-note">無酒精</div>
+      <div class="ticket-card-price">NT$829<span>/人</span></div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="section-heading">注意事項</div>
+  <div class="notes-card">
+    <ul>
+      <li>本場次限售 <strong>15 張</strong>票，售完為止</li>
+      <li>預售一經完售即<strong>不開放現場票</strong>，視購票情況與場地狀況加開</li>
+      <li>網路預售開賣時間：<strong>5/14（四）12:00</strong> 準時開賣，至 <strong>5/18（一）23:59</strong> 截止</li>
+      <li>現場票僅限 5/19 當日於 ViBES 現場購買，無法透過本網站購買</li>
+      <li>購票完成後請務必<strong>截圖或下載電子票券</strong>，入場時出示票券供核對</li>
+      <li>電子票券完成付款確認後即為有效票，請於付款後截圖訂單編號通知主辦</li>
+      <li>演出地址：台北市松山區中正里南京東路三段 301 號</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 &nbsp;·&nbsp; Powered by ViBES 歌喉響宴 KTV
+</footer>
+
+<!-- ─────────────── PURCHASE MODAL ─────────────── -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">購票</div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── HIDDEN TICKET RENDER ─────────────── -->
+<canvas id="ticketCanvas" style="display:none"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ────────────────────────────────────────────────
+//  CONFIG
+// ────────────────────────────────────────────────
+const DEFAULT_TITLE = '哈哈哈哈哈哈哈哈 哈利首場個人專場';
+
+const DEFAULT_TICKET_TYPES = [
+  { id: 'presale_drink', label: '預售走喝酒票', price: 929, note: '限兩杯', presale: true },
+  { id: 'presale_nondry', label: '預售去走走票', price: 799, note: '無酒精', presale: true },
+];
+
+const SALE_START = new Date('2026-05-14T12:00:00+08:00');
+const SALE_END   = new Date('2026-05-18T23:59:59+08:00');
+const EVENT_DATE = '2026/05/19（二）';
+const EVENT_VENUE = 'ViBES 歌喉響宴 KTV';
+const EVENT_ADDR  = '台北市松山區中正里南京東路三段 301 號';
+const DOORS_OPEN  = '19:30';
+const SHOW_START  = '19:45';
+
+// ────────────────────────────────────────────────
+//  STATE
+// ────────────────────────────────────────────────
+let eventData = null;        // from /api/event
+let currentStep = 1;
+let selectedTicket = null;
+let orderResult = null;
+
+// ────────────────────────────────────────────────
+//  INIT
+// ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadEventData();
+  initCountdown();
+  initButtons();
+});
+
+async function loadEventData() {
+  try {
+    const res = await fetch('/api/event');
+    if (!res.ok) throw new Error('API error');
+    eventData = await res.json();
+    document.getElementById('eventTitle').textContent = eventData.title || '專場演唱會';
+    document.title = eventData.title || '購票系統';
+    renderAvailBar();
+  } catch (e) {
+    document.getElementById('eventTitle').textContent = DEFAULT_TITLE;
+    document.title = DEFAULT_TITLE + ' ｜ 購票';
+    console.warn('Could not load event data:', e.message);
+  }
+}
+
+function renderAvailBar() {
+  if (!eventData) return;
+  const { soldCount, totalTickets, remaining } = eventData;
+  const wrap = document.getElementById('availWrap');
+  wrap.style.display = 'block';
+  document.getElementById('availText').textContent = `已售 ${soldCount} / ${totalTickets} 張，剩餘 ${remaining} 張`;
+  const pct = Math.min(100, Math.round((soldCount / totalTickets) * 100));
+  document.getElementById('availFill').style.width = pct + '%';
+}
+
+// ────────────────────────────────────────────────
+//  COUNTDOWN
+// ────────────────────────────────────────────────
+function initCountdown() {
+  tick();
+  setInterval(tick, 1000);
+}
+
+function tick() {
+  const now = new Date();
+  if (now >= SALE_START) {
+    // hide countdown, update button
+    document.getElementById('countdown-section').style.display = 'none';
+    updateHeroAction();
+    return;
+  }
+  const diff = SALE_START - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2, '0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2, '0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2, '0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2, '0');
+}
+
+function getSaleStatus() {
+  const now = new Date();
+  if (now < SALE_START) return 'upcoming';
+  if (now > SALE_END)   return 'ended';
+  if (eventData && eventData.remaining <= 0) return 'soldout';
+  return 'open';
+}
+
+function updateHeroAction() {
+  const status = getSaleStatus();
+  const wrap = document.getElementById('heroAction');
+  if (status === 'open') {
+    wrap.innerHTML = `<button class="btn-buy" id="buyHeroBtn">🎫 立即購票</button>`;
+    document.getElementById('buyHeroBtn').addEventListener('click', openModal);
+  } else if (status === 'soldout') {
+    wrap.innerHTML = `<div class="sold-out-badge">😢 票券已售完</div>`;
+  } else if (status === 'ended') {
+    wrap.innerHTML = `<div class="sale-ended-badge">預售已結束，敬請期待下次活動</div>`;
+  } else {
+    wrap.innerHTML = `<button class="btn-buy" disabled>🎫 立即購票</button>`;
+  }
+}
+
+function initButtons() {
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalBackdrop')) closeModal();
+  });
+  // check countdown resolved already
+  if (new Date() >= SALE_START) updateHeroAction();
+}
+
+// ────────────────────────────────────────────────
+//  MODAL
+// ────────────────────────────────────────────────
+function openModal() {
+  currentStep = 1;
+  selectedTicket = null;
+  renderStep();
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderStep() {
+  const body = document.getElementById('modalBody');
+  document.getElementById('modalTitle').textContent = ['', '選擇票種', '填寫資訊', '確認訂單', '購票完成'][currentStep];
+  body.innerHTML = buildSteps() + buildStepContent(currentStep);
+  bindStepHandlers(currentStep);
+}
+
+function buildSteps() {
+  const labels = ['', '票種', '資訊', '確認', '完成'];
+  let html = '<div class="steps">';
+  for (let i = 1; i <= 4; i++) {
+    const cls = i < currentStep ? 'done' : i === currentStep ? 'active' : '';
+    const inner = i < currentStep ? '✓' : i;
+    html += `<div class="step"><div class="step-dot ${cls}">${inner}</div></div>`;
+    if (i < 4) html += `<div class="step-line ${i < currentStep ? 'done' : ''}"></div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function buildStepContent(step) {
+  if (step === 1) return buildStep1();
+  if (step === 2) return buildStep2();
+  if (step === 3) return buildStep3();
+  if (step === 4) return buildStep4();
+  return '';
+}
+
+// ── Step 1: ticket type ──
+function buildStep1() {
+  const tickets = (eventData?.ticketTypes || DEFAULT_TICKET_TYPES).filter(t => t.presale);
+  let opts = '';
+  tickets.forEach(t => {
+    const sel = selectedTicket?.id === t.id ? 'selected' : '';
+    opts += `
+      <label class="ticket-option ${sel}" data-id="${t.id}">
+        <input type="radio" name="ticketType" value="${t.id}" ${sel ? 'checked' : ''} />
+        <div class="ticket-opt-radio"></div>
+        <div class="ticket-opt-info">
+          <div class="ticket-opt-name">${t.label}</div>
+          <div class="ticket-opt-note">${t.note}</div>
+        </div>
+        <div class="ticket-opt-price">NT$${t.price.toLocaleString()}<span>/人</span></div>
+      </label>`;
+  });
+  return `
+    <div class="ticket-options">${opts}</div>
+    <br/>
+    <button class="btn btn-primary" id="step1Next" ${selectedTicket ? '' : 'disabled'}>下一步 →</button>
+  `;
+}
+
+// ── Step 2: buyer info ──
+function buildStep2() {
+  return `
+    <div class="form-group">
+      <label>姓名<span class="req">*</span></label>
+      <input class="form-control" id="f-name" type="text" placeholder="請輸入真實姓名" autocomplete="name" />
+      <div class="field-error" id="e-name"></div>
+    </div>
+    <div class="form-group">
+      <label>手機號碼<span class="req">*</span></label>
+      <input class="form-control" id="f-phone" type="tel" placeholder="09xxxxxxxx" autocomplete="tel" />
+      <div class="field-error" id="e-phone"></div>
+    </div>
+    <div class="form-group">
+      <label>Email<span class="req">*</span></label>
+      <input class="form-control" id="f-email" type="email" placeholder="your@email.com" autocomplete="email" />
+      <div class="field-error" id="e-email"></div>
+    </div>
+    <div class="form-group">
+      <label>購買數量<span class="req">*</span></label>
+      <select class="form-control" id="f-qty">
+        ${buildQtyOptions()}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>備註（選填）</label>
+      <input class="form-control" id="f-notes" type="text" placeholder="飲食需求或其他備註" />
+    </div>
+    <div style="display:flex; gap:10px; margin-top:8px;">
+      <button class="btn btn-ghost" id="step2Back" style="width:40%">← 上一步</button>
+      <button class="btn btn-primary" id="step2Next" style="width:60%">下一步 →</button>
+    </div>
+  `;
+}
+
+function buildQtyOptions() {
+  const max = eventData ? Math.min(4, eventData.remaining) : 4;
+  let opts = '';
+  for (let i = 1; i <= max; i++) opts += `<option value="${i}">${i} 張</option>`;
+  return opts;
+}
+
+// ── Step 3: review ──
+function buildStep3() {
+  const form = window._pendingForm || {};
+  const qty = Number(form.quantity || 1);
+  const price = selectedTicket?.price || 0;
+  const total = price * qty;
+  const pay = eventData?.payment || {};
+
+  return `
+    <div class="summary-card">
+      <div class="summary-row"><span class="label">活動</span><span>${eventData?.title || DEFAULT_TITLE}</span></div>
+      <div class="summary-row"><span class="label">日期</span><span>${EVENT_DATE}</span></div>
+      <div class="summary-row"><span class="label">票種</span><span>${selectedTicket?.label || ''}</span></div>
+      <div class="summary-row"><span class="label">數量</span><span>${qty} 張</span></div>
+      <div class="summary-row"><span class="label">姓名</span><span>${form.name || ''}</span></div>
+      <div class="summary-row"><span class="label">手機</span><span>${form.phone || ''}</span></div>
+      <div class="summary-row"><span class="label">Email</span><span>${form.email || ''}</span></div>
+      ${form.notes ? `<div class="summary-row"><span class="label">備註</span><span>${form.notes}</span></div>` : ''}
+      <div class="summary-total"><span>合計</span><span class="amount">NT$${total.toLocaleString()}</span></div>
+    </div>
+
+    <div class="payment-info">
+      <h3>💳 付款方式（擇一即可）</h3>
+      <div class="payment-option-row">
+        <div class="payment-opt">
+          <div class="payment-opt-icon">💵</div>
+          <div class="payment-opt-body">
+            <div class="payment-opt-title">現金</div>
+            <div class="payment-opt-desc">活動當日現場繳費，<br/>入場前交給主辦人員</div>
+          </div>
+        </div>
+        <div class="payment-opt-divider">或</div>
+        <div class="payment-opt">
+          <div class="payment-opt-icon">💚</div>
+          <div class="payment-opt-body">
+            <div class="payment-opt-title">LINE Pay</div>
+            ${pay.linepayId
+              ? `<div class="payment-opt-desc">轉帳給<br/><strong class="payment-id">${pay.linepayId}</strong></div>`
+              : `<div class="payment-opt-desc" style="color:rgba(255,255,255,0.35)">（主辦尚未設定 ID）</div>`
+            }
+          </div>
+        </div>
+      </div>
+      <div class="payment-note">⚠️ ${pay.note || '付款完成後請截圖傳給主辦確認，訂單確認後票券即生效'}</div>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-ghost" id="step3Back" style="width:40%">← 上一步</button>
+      <button class="btn btn-primary" id="step3Submit" style="width:60%">確認購票</button>
+    </div>
+  `;
+}
+
+// ── Step 4: ticket ──
+function buildStep4() {
+  return `
+    <div id="ticket-display">
+      <h2>🎉 訂單已成立！</h2>
+      <p>請完成付款後截圖通知主辦，付款確認後票券即生效</p>
+      <div class="ticket-canvas-wrap">
+        <canvas id="ticketCanvas"></canvas>
+      </div>
+      <br/>
+      <button class="btn-download" id="downloadBtn">⬇ 下載電子票券</button>
+      <div class="ticket-warning">
+        📌 請妥善保管此票券<br/>
+        入場時出示票券 QR Code 供主辦核對<br/>
+        訂單編號：<strong id="orderIdDisplay"></strong>
+      </div>
+    </div>
+  `;
+}
+
+// ────────────────────────────────────────────────
+//  STEP HANDLERS
+// ────────────────────────────────────────────────
+function bindStepHandlers(step) {
+  if (step === 1) {
+    document.querySelectorAll('.ticket-option').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.ticket-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        const id = el.dataset.id;
+        selectedTicket = (eventData?.ticketTypes || DEFAULT_TICKET_TYPES).find(t => t.id === id) || null;
+        const btn = document.getElementById('step1Next');
+        if (btn) btn.disabled = !selectedTicket;
+      });
+    });
+    const next = document.getElementById('step1Next');
+    if (next) next.addEventListener('click', () => { currentStep = 2; renderStep(); });
+  }
+
+  if (step === 2) {
+    document.getElementById('step2Back').addEventListener('click', () => { currentStep = 1; renderStep(); });
+    document.getElementById('step2Next').addEventListener('click', () => {
+      const name  = document.getElementById('f-name').value.trim();
+      const phone = document.getElementById('f-phone').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const qty   = document.getElementById('f-qty').value;
+      const notes = document.getElementById('f-notes').value.trim();
+      let ok = true;
+
+      if (name.length < 2) {
+        document.getElementById('e-name').textContent = '請輸入姓名（至少 2 個字）';
+        document.getElementById('f-name').classList.add('error');
+        ok = false;
+      } else {
+        document.getElementById('e-name').textContent = '';
+        document.getElementById('f-name').classList.remove('error');
+      }
+      if (!/^09\d{8}$/.test(phone)) {
+        document.getElementById('e-phone').textContent = '請輸入正確手機號碼（09xxxxxxxx）';
+        document.getElementById('f-phone').classList.add('error');
+        ok = false;
+      } else {
+        document.getElementById('e-phone').textContent = '';
+        document.getElementById('f-phone').classList.remove('error');
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('e-email').textContent = '請輸入有效的 Email';
+        document.getElementById('f-email').classList.add('error');
+        ok = false;
+      } else {
+        document.getElementById('e-email').textContent = '';
+        document.getElementById('f-email').classList.remove('error');
+      }
+      if (!ok) return;
+
+      window._pendingForm = { name, phone, email, quantity: qty, notes };
+      currentStep = 3;
+      renderStep();
+    });
+  }
+
+  if (step === 3) {
+    document.getElementById('step3Back').addEventListener('click', () => { currentStep = 2; renderStep(); });
+    document.getElementById('step3Submit').addEventListener('click', submitOrder);
+  }
+
+  if (step === 4 && orderResult) {
+    document.getElementById('orderIdDisplay').textContent = orderResult.orderId;
+    renderTicket(orderResult).then(() => {
+      document.getElementById('downloadBtn').addEventListener('click', downloadTicket);
+    });
+  }
+}
+
+// ────────────────────────────────────────────────
+//  SUBMIT ORDER
+// ────────────────────────────────────────────────
+async function submitOrder() {
+  const btn = document.getElementById('step3Submit');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> 處理中…';
+
+  const form = window._pendingForm;
+  try {
+    const res = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        ticketTypeId: selectedTicket.id,
+        quantity: Number(form.quantity),
+        notes: form.notes,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || '購票失敗');
+    orderResult = data.order;
+    // refresh availability
+    loadEventData();
+    currentStep = 4;
+    renderStep();
+  } catch (err) {
+    btn.disabled = false;
+    btn.innerHTML = '確認購票';
+    showToast(err.message || '購票失敗，請稍後再試');
+  }
+}
+
+// ────────────────────────────────────────────────
+//  TICKET CANVAS RENDERING
+// ────────────────────────────────────────────────
+async function renderTicket(order) {
+  await document.fonts.ready;
+
+  const canvas = document.getElementById('ticketCanvas');
+  const DPR = 2;
+  const W = 840, H = 320;
+  canvas.width  = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(DPR, DPR);
+
+  // ── Background ──
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0,   '#12002e');
+  bg.addColorStop(0.5, '#1e0850');
+  bg.addColorStop(1,   '#060620');
+  ctx.fillStyle = bg;
+  roundRect(ctx, 0, 0, W, H, 14);
+  ctx.fill();
+
+  // Subtle dot grid
+  ctx.fillStyle = 'rgba(255,255,255,0.025)';
+  for (let x = 20; x < W; x += 30)
+    for (let y = 20; y < H; y += 30) {
+      ctx.beginPath(); ctx.arc(x, y, 1, 0, Math.PI*2); ctx.fill();
+    }
+
+  // Glow circles
+  const g1 = ctx.createRadialGradient(80, 80, 0, 80, 80, 180);
+  g1.addColorStop(0, 'rgba(124,58,237,0.3)');
+  g1.addColorStop(1, 'transparent');
+  ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+
+  const g2 = ctx.createRadialGradient(W-80, H-80, 0, W-80, H-80, 160);
+  g2.addColorStop(0, 'rgba(224,64,160,0.2)');
+  g2.addColorStop(1, 'transparent');
+  ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+
+  // ── Gold border ──
+  ctx.strokeStyle = '#ffd700';
+  ctx.lineWidth = 2;
+  roundRect(ctx, 5, 5, W-10, H-10, 12);
+  ctx.stroke();
+
+  // ── Stub separator ──
+  const stubX = 580;
+  ctx.fillStyle = 'rgba(0,0,0,0.25)';
+  ctx.fillRect(stubX, 5, W-stubX-5, H-10);
+
+  ctx.setLineDash([5, 5]);
+  ctx.strokeStyle = 'rgba(255,215,0,0.35)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(stubX, 20); ctx.lineTo(stubX, H-20); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Notch circles
+  ctx.fillStyle = '#0a0a14';
+  ctx.beginPath(); ctx.arc(stubX, 14, 10, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(stubX, H-14, 10, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(stubX, 14, 10, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(stubX, H-14, 10, 0, Math.PI*2); ctx.stroke();
+
+  // ── Main section text ──
+  const evTitle = eventData?.title || DEFAULT_TITLE;
+
+  // Event name
+  ctx.fillStyle = '#ffd700';
+  ctx.font = `bold ${evTitle.length > 12 ? 22 : 26}px "Noto Sans TC", sans-serif`;
+  ctx.fillText(truncate(evTitle, 18), 28, 58);
+
+  // Divider
+  ctx.strokeStyle = 'rgba(255,215,0,0.25)'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(28, 70); ctx.lineTo(540, 70); ctx.stroke();
+
+  // Details
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  ctx.font = '14px "Noto Sans TC", sans-serif';
+  ctx.fillText(`演出日期  ${EVENT_DATE}`, 28, 95);
+  ctx.fillText(`入場時間  ${DOORS_OPEN}  開演  ${SHOW_START}`, 28, 118);
+  ctx.fillText(`演出場地  ${EVENT_VENUE}`, 28, 141);
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.font = '12px "Noto Sans TC", sans-serif';
+  ctx.fillText(EVENT_ADDR, 28, 160);
+
+  // Second divider
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(28, 175); ctx.lineTo(540, 175); ctx.stroke();
+
+  // Buyer name
+  ctx.fillStyle = '#ffffff';
+  ctx.font = `bold 20px "Noto Sans TC", sans-serif`;
+  ctx.fillText(order.name, 28, 205);
+
+  // Ticket type tag
+  ctx.fillStyle = '#7c3aed';
+  roundRect(ctx, 28, 215, measureTextWidth(ctx, order.ticketType, '13px "Noto Sans TC"') + 24, 26, 5);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = '13px "Noto Sans TC", sans-serif';
+  ctx.fillText(order.ticketType, 40, 233);
+
+  // Quantity & amount
+  const tagW = measureTextWidth(ctx, order.ticketType, '13px "Noto Sans TC"') + 24 + 12;
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.font = '13px sans-serif';
+  ctx.fillText(`x${order.quantity}  /  NT$${order.amount.toLocaleString()}`, 28 + tagW, 233);
+
+  // ADMIT ONE badge
+  ctx.fillStyle = '#ffd700';
+  roundRect(ctx, 28, 260, 110, 34, 6); ctx.fill();
+  ctx.fillStyle = '#12002e';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('ADMIT ONE', 83, 282);
+  ctx.textAlign = 'left';
+
+  // ── Stub section: QR Code ──
+  const qrSize = 130;
+  const qrX = stubX + (W - stubX - qrSize) / 2;
+  const qrY = 28;
+
+  // Generate QR as data URL
+  const qrDataUrl = await generateQR(`VIBES:${order.orderId}:${order.name}`);
+  const qrImg = new Image();
+  await new Promise(resolve => { qrImg.onload = resolve; qrImg.src = qrDataUrl; });
+
+  // White background behind QR
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, qrX - 6, qrY - 6, qrSize + 12, qrSize + 12, 8); ctx.fill();
+  ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+
+  // Order ID below QR
+  ctx.fillStyle = '#ffd700';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  const stubCenter = stubX + (W - stubX) / 2;
+  ctx.fillText(order.orderId, stubCenter, qrY + qrSize + 24);
+
+  // Ticket type in stub
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.font = '11px "Noto Sans TC", sans-serif';
+  ctx.fillText(order.ticketType, stubCenter, qrY + qrSize + 42);
+
+  // 一人一票
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '10px "Noto Sans TC", sans-serif';
+  ctx.fillText('請妥善保管', stubCenter, qrY + qrSize + 60);
+  ctx.textAlign = 'left';
+}
+
+function generateQR(text) {
+  return new Promise((resolve, reject) => {
+    const div = document.createElement('div');
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    new QRCode(div, {
+      text,
+      width: 200, height: 200,
+      colorDark: '#000000', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+    setTimeout(() => {
+      const img = div.querySelector('img') || div.querySelector('canvas');
+      const src = img ? (img.src || img.toDataURL()) : '';
+      document.body.removeChild(div);
+      resolve(src);
+    }, 100);
+  });
+}
+
+function downloadTicket() {
+  const canvas = document.getElementById('ticketCanvas');
+  const link = document.createElement('a');
+  link.download = `ticket-${orderResult?.orderId || 'vibes'}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// ────────────────────────────────────────────────
+//  HELPERS
+// ────────────────────────────────────────────────
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function truncate(str, max) {
+  return str.length > max ? str.slice(0, max) + '…' : str;
+}
+
+function measureTextWidth(ctx, text, font) {
+  const prev = ctx.font;
+  ctx.font = font;
+  const w = ctx.measureText(text).width;
+  ctx.font = prev;
+  return w;
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = `
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:#f87171; color:#fff; padding:12px 24px; border-radius:12px;
+    font-weight:600; font-size:14px; z-index:9999; box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  `;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+</script>
+</body>
+</html>
